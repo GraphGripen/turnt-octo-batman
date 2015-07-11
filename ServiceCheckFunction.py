@@ -83,7 +83,7 @@ def generateReportLog_version2(path,fileLogName,info,splitSymbol) :
     content = []
     content.append('{"' + "timestamp" + '":'+'"' + info.creationTime + '"')
     content.append('"' + "msg_severity"  + '":'+'"' + info.severity + '"')
-    content.append('"' + "message"  + '":'+'"' + info.msg + '"')
+    content.append('"' + "message"  + '":'+'"' + info.msg + '"}')
 
     output = splitSymbol.join(content) + '\r\n'
     f_out.write(output)
@@ -102,7 +102,8 @@ def readFindProcessID(path):
 # =============================== ServiceCheckAvailability's Function =============================  
 def CheckRunningBAT(filename,destinationLog):
     #Begin
-    command = r'tasklist /fi "windowtitle eq Command Prompt - c:\Python26\python.exe ' + filename + '.py">' + destinationLog + '\check' + filename + '.log' 
+    command = r'tasklist /fi "windowtitle eq Command Prompt - c:\Python26\python.exe D:\PostProcess\Script'+ '\\' + filename + '.py">' + destinationLog + '\check' + filename + '.log' 
+    #command = r'tasklist /fi "windowtitle eq Command Prompt - c:\Python26\python.exe ' + filename + '.py">' + destinationLog + '\check' + filename + '.log' 
     filepath = r""+ destinationLog + '\check'+ filename + ".log"
     os.system(command)
     contentLog = ReadfileLog(filepath)
@@ -121,8 +122,8 @@ def CheckEXEInTask (nameProcess,waitTime):
     #After
     task = wmi.WMI ()
     countTsiLoadTestAfter = len(task.Win32_Process (name = nameProcess))
-    print "countTsiLoadTestBefore : " + str(countTsiLoadTestBefore)
-    print "countTsiLoadTestAfter : " + str(countTsiLoadTestAfter)
+    #print "countTsiLoadTestBefore : " + str(countTsiLoadTestBefore)
+    #print "countTsiLoadTestAfter : " + str(countTsiLoadTestAfter)
     pythoncom.CoUninitialize()
     #Check
     if (countTsiLoadTestBefore != countTsiLoadTestAfter) :
@@ -176,8 +177,8 @@ def CheckSensuLog (path,waitTime):
     statinfo = os.stat(path)
     sizeAfter = statinfo.st_size
     #Check
-    print sizeBefore
-    print sizeAfter
+    #print sizeBefore
+    #print sizeAfter
     if sizeBefore != sizeAfter and sizeBefore < sizeAfter :
         return True
     return False

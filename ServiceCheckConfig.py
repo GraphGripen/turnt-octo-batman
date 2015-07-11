@@ -14,28 +14,26 @@ sequenceNumber = 0
 # =============================== ServiceCheckAvailability's Configuration ===============================
 #For Configure Property in ServiceCheckAvailability
 Operation = {'logname' : "Operation.log" , 'severity' : "CRITICAL" , 'recoverySeverity' : "INFORMATION" ,'splitSymbol' : ","}
-#pathOperation = r"D:\E2EPerformance\E2EMonitoring\Log"
-pathOperation = r"C:\Users\U6031187\Desktop"
+pathOperation = r"D:\E2EPerformance\E2EMonitoring\Log"
 
 #For Configure Property in Function CheckRunningBAT (1-2-3-4)
-#pathCRBAT = r"D:\E2EPerformance\E2EMonitoring\Log\temp"
-pathCRBAT = r"C:\Users\U6031187\Desktop\E2ELog2GMI"
+pathCRBAT = r"D:\E2EPerformance\E2EMonitoring\Log\temp"
 nameFileBAT = {'nameFile1' : "AnalysisTestResult" , 'nameFile2' : "zipTSILog" , 'nameFile3' : "HousekeepingLog" , 'nameFile4' : "ContinuesRun_EikonMon"}
 
 #For Configure Property in Function CheckEXEInTask (5)
 FileTsiLoadTest = "TsiLoadTest.exe"
-waitTimeCEXEIT = 20
+waitTimeCEXEIT = 30
 
 #For Configure Property in Function CheckStatusService (6)
 nameService = "sensu-client"
 
 #For Configure Property in Function CheckSinceYaml (7)
 pathCSY = r"D:\E2EPerformance\AppstatParser\bin\since-db1-e2e-perf.yaml"
-waitTimeCSY = 20
+waitTimeCSY = 60
 
 #For Configure Property in Function CheckSensuLog (8)
 pathCSL = r"D:\eikon\monitoring\log\sensu\sensu-client.log"
-waitTimeCSL = 20
+waitTimeCSL = 40
 
 #For Path File For File .py
 pathRecoveryAnalysisTestResult = r'D:\PostProcess\Script\AnalysisTestResult.py'
@@ -69,7 +67,6 @@ waitTimeAll = max(waitTimeCSL,waitTimeCSY,waitTimeCEXEIT) + 5
 # =============================== ServiceCheckResponseTime's Configuration ===============================
 #For Configure Property in ServiceCheckResponseTime
 Developer = {'logname' : "Developer.log" , 'severity' : "WARNING" , 'splitSymbol' : "|"}
-#pathDeveloper = r"D:\E2EPerformance\AppstatParser\logs\HanuLogs\E2ELog2GMI"
 pathDeveloper = r"D:\E2EPerformance\E2EMonitoring\Log"
 
 #For Configure Property in Function CheckResponseTime

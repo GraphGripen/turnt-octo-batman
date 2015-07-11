@@ -16,7 +16,7 @@ def infoServiceCheckAvailability(severity,msg):
     return infoResult
     
 def runServiceCheckAvailability_101():
-    print "RUN 101\n"
+    print "RUN Check AnalysisTestResult.py\n"
     if ServiceCheckFunction.CheckRunningBAT(ServiceCheckConfig.nameFileBAT['nameFile1'],ServiceCheckConfig.pathCRBAT) == False :
         #Notify ==> AnalysisTestResult.py isn't running
         infoAnalysisTestResult = infoServiceCheckAvailability(ServiceCheckConfig.Operation['severity'],ServiceCheckConfig.falseMsg_101)
@@ -40,7 +40,7 @@ def runServiceCheckAvailability_101():
             ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathOperation,ServiceCheckConfig.Operation['logname'],infoAnalysisTestResult,ServiceCheckConfig.Operation['splitSymbol'])
     
 def runServiceCheckAvailability_102():
-    print "RUN 102\n"        
+    print "RUN Check zipTSILog.py\n"        
     if ServiceCheckFunction.CheckRunningBAT(ServiceCheckConfig.nameFileBAT['nameFile2'],ServiceCheckConfig.pathCRBAT) == False  :
         #Notify ==> zipTSILog.py isn't running
         infozipTSILog = infoServiceCheckAvailability(ServiceCheckConfig.Operation['severity'],ServiceCheckConfig.falseMsg_102)
@@ -64,7 +64,7 @@ def runServiceCheckAvailability_102():
             ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathOperation,ServiceCheckConfig.Operation['logname'],infozipTSILog,ServiceCheckConfig.Operation['splitSymbol'])
 
 def runServiceCheckAvailability_103():
-    print "RUN 103\n"
+    print "RUN Check HousekeepingLog.py\n"
     if ServiceCheckFunction.CheckRunningBAT(ServiceCheckConfig.nameFileBAT['nameFile3'],ServiceCheckConfig.pathCRBAT) == False :
         #Notify ==> HousekeepingLog.py isn't running
         infoHousekeepingLog = infoServiceCheckAvailability(ServiceCheckConfig.Operation['severity'],ServiceCheckConfig.falseMsg_103)
@@ -88,7 +88,7 @@ def runServiceCheckAvailability_103():
             ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathOperation,ServiceCheckConfig.Operation['logname'],infoHousekeepingLog,ServiceCheckConfig.Operation['splitSymbol'])
 
 def runServiceCheckAvailability_104():            
-    print "RUN 104\n"
+    print "RUN Check ContinuesRun_EikonMon.py\n"
     if ServiceCheckFunction.CheckRunningBAT(ServiceCheckConfig.nameFileBAT['nameFile4'],ServiceCheckConfig.pathCRBAT) == False :
         #Notify ==> ContinuesRun_EikonMon.py isn't running
         infoEikonMon = infoServiceCheckAvailability(ServiceCheckConfig.Operation['severity'],ServiceCheckConfig.falseMsg_104)
@@ -112,7 +112,7 @@ def runServiceCheckAvailability_104():
             ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathOperation,ServiceCheckConfig.Operation['logname'],infoEikonMon,ServiceCheckConfig.Operation['splitSymbol'])       
             
 def runServiceCheckAvailability_105():
-    print "RUN 105\n"
+    print "RUN Check TsiLoadTest.exe\n"
     if ServiceCheckFunction.CheckEXEInTask(ServiceCheckConfig.FileTsiLoadTest,ServiceCheckConfig.waitTimeCEXEIT) == False :
         #Notify ==> TsiLoadTest.exe isn't running
         infoEXEInTask = infoServiceCheckAvailability(ServiceCheckConfig.Operation['severity'],ServiceCheckConfig.falseMsg_105)
@@ -133,7 +133,7 @@ def runServiceCheckAvailability_105():
             ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathOperation,ServiceCheckConfig.Operation['logname'],infoEXEInTask,ServiceCheckConfig.Operation['splitSymbol'])
 
 def runServiceCheckAvailability_106():
-    print "RUN 106\n"
+    print "RUN Check Sensu-Client-Service\n"
     if ServiceCheckFunction.CheckStatusService (ServiceCheckConfig.nameService) == False :
         #Notify ==> Sensu-Client-Service isn't running
         infoStatusService = infoServiceCheckAvailability(ServiceCheckConfig.Operation['severity'],ServiceCheckConfig.falseMsg_106)
@@ -154,7 +154,7 @@ def runServiceCheckAvailability_106():
             ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathOperation,ServiceCheckConfig.Operation['logname'],infoStatusService,ServiceCheckConfig.Operation['splitSymbol'])
 
 def runServiceCheckAvailability_107():
-    print "RUN 107\n"        
+    print "RUN Check since-db1-e2e-perf.yaml\n"        
     if ServiceCheckFunction.CheckSinceYaml (ServiceCheckConfig.pathCSY,ServiceCheckConfig.waitTimeCSY) == False :
         #Notify ==> since-db1-e2e-perf.yaml isn't changing
         infoSinceYaml = infoServiceCheckAvailability(ServiceCheckConfig.Operation['severity'],ServiceCheckConfig.falseMsg_107)
@@ -175,7 +175,7 @@ def runServiceCheckAvailability_107():
             ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathOperation,ServiceCheckConfig.Operation['logname'],infoSinceYaml,ServiceCheckConfig.Operation['splitSymbol'])
 
 def runServiceCheckAvailability_108():
-    print "RUN 108\n"        
+    print "RUN Check sensu-client.log\n"        
     if ServiceCheckFunction.CheckSensuLog (ServiceCheckConfig.pathCSL,ServiceCheckConfig.waitTimeCSL) == False :
         #Notify ==> sensu-client.log isn't changing
         infoSensuLog = infoServiceCheckAvailability(ServiceCheckConfig.Operation['severity'],ServiceCheckConfig.falseMsg_108)
@@ -197,14 +197,12 @@ def runServiceCheckAvailability_108():
             
 def ServiceCheckAvailability():
     runServiceCheckAvailability_101()
-    runServiceCheckAvailability_102()             
-    #runServiceCheckAvailability_103()             
+    runServiceCheckAvailability_102()                       
     runServiceCheckAvailability_104()             
     thread.start_new_thread(runServiceCheckAvailability_105,())          
     runServiceCheckAvailability_106()             
     thread.start_new_thread(runServiceCheckAvailability_107,())             
     thread.start_new_thread(runServiceCheckAvailability_108,())
-    time.sleep(ServiceCheckConfig.waitTimeAll)
                
 if __name__ == '__main__':
     ServiceCheckAvailability()
