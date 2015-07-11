@@ -1,4 +1,3 @@
-import subprocess
 import os
 
 import ServiceCheckConfig
@@ -7,9 +6,7 @@ def RecoveryRunningBAT(filename):
     if filename == "AnalysisTestResult" :
         path = ServiceCheckConfig.pathRecoveryAnalysisTestResult
         if os.path.exists(path) == True :
-            #command = r'c:\python26\python.exe ' + path
             command = r'start "Command Prompt" call c:\python26\python.exe ' + path
-            #subprocess.Popen(command,cwd = r'D:\PostProcess\Script',creationflags=subprocess.CREATE_NEW_CONSOLE)
             os.system(command)
             return True
         else:
@@ -18,20 +15,7 @@ def RecoveryRunningBAT(filename):
     elif filename == "zipTSILog" :
         path = ServiceCheckConfig.pathRecoveryzipTSILog
         if os.path.exists(path) == True :
-            #command = r'c:\python26\python.exe ' + path
             command = r'start "Command Prompt" call c:\python26\python.exe ' + path
-            #subprocess.Popen(command)
-            os.system(command)
-            return True
-        else:
-            return False
-
-    elif filename == "HousekeepingLog" :
-        path = ServiceCheckConfig.pathRecoveryHousekeepingLog
-        if os.path.exists(path) == True :
-            #command = r'c:\python26\python.exe ' + path
-            command = r'start "Command Prompt" call c:\python26\python.exe ' + path
-            #subprocess.Popen(command)
             os.system(command)
             return True
         else:
@@ -40,9 +24,7 @@ def RecoveryRunningBAT(filename):
     elif filename == "ContinuesRun_EikonMon" :
         path = ServiceCheckConfig.pathRecoveryEikonMon
         if os.path.exists(path) == True :
-            #command = r'c:\python26\python.exe ' + path
             command = r'start "Command Prompt" call c:\python26\python.exe ' + path
-            #subprocess.Popen(command)
             os.system(command)
             return True
         else:

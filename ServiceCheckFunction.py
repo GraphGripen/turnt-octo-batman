@@ -103,7 +103,6 @@ def readFindProcessID(path):
 def CheckRunningBAT(filename,destinationLog):
     #Begin
     command = r'tasklist /fi "windowtitle eq Command Prompt - c:\Python26\python.exe D:\PostProcess\Script'+ '\\' + filename + '.py">' + destinationLog + '\check' + filename + '.log' 
-    #command = r'tasklist /fi "windowtitle eq Command Prompt - c:\Python26\python.exe ' + filename + '.py">' + destinationLog + '\check' + filename + '.log' 
     filepath = r""+ destinationLog + '\check'+ filename + ".log"
     os.system(command)
     contentLog = ReadfileLog(filepath)
@@ -122,8 +121,6 @@ def CheckEXEInTask (nameProcess,waitTime):
     #After
     task = wmi.WMI ()
     countTsiLoadTestAfter = len(task.Win32_Process (name = nameProcess))
-    #print "countTsiLoadTestBefore : " + str(countTsiLoadTestBefore)
-    #print "countTsiLoadTestAfter : " + str(countTsiLoadTestAfter)
     pythoncom.CoUninitialize()
     #Check
     if (countTsiLoadTestBefore != countTsiLoadTestAfter) :
@@ -175,10 +172,8 @@ def CheckSensuLog (path,waitTime):
     time.sleep(waitTime)
     #After
     statinfo = os.stat(path)
-    sizeAfter = statinfo.st_size
+    sizeAfter = statinfo.st_size    
     #Check
-    #print sizeBefore
-    #print sizeAfter
     if sizeBefore != sizeAfter and sizeBefore < sizeAfter :
         return True
     return False
@@ -198,8 +193,8 @@ def CheckResponseTime (server,type,interval,time):
         limitTime = ServiceCheckConfig.serverHDC[type][interval]
     elif server == "DTC" : 
         limitTime = ServiceCheckConfig.serverDTC[type][interval]
-    
-    if time < limitTime :
+
+    if float(time) <= limitTime :
         return True 
     return False
      
