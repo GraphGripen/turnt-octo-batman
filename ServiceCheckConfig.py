@@ -13,12 +13,12 @@ sequenceNumber = 0
 
 # =============================== ServiceCheckAvailability's Configuration ===============================
 #For Configure Property in ServiceCheckAvailability
-Operation = {'logname' : "Operation_E2ELog2GMI.log" , 'severity' : "CRITICAL" , 'recoverySeverity' : "INFORMATION" ,'splitSymbol' : ","}
-#pathOperation = r"D:\E2EPerformance\AppstatParser\logs\HanuLogs\E2ELog2GMI"
+Operation = {'logname' : "Operation.log" , 'severity' : "CRITICAL" , 'recoverySeverity' : "INFORMATION" ,'splitSymbol' : ","}
+#pathOperation = r"D:\E2EPerformance\E2EMonitoring\Log"
 pathOperation = r"C:\Users\U6031187\Desktop"
 
 #For Configure Property in Function CheckRunningBAT (1-2-3-4)
-#pathCRBAT = r"D:\E2EPerformance\AppstatParser\logs\HanuLogs\E2ELog2GMI"
+#pathCRBAT = r"D:\E2EPerformance\E2EMonitoring\Log\temp"
 pathCRBAT = r"C:\Users\U6031187\Desktop\E2ELog2GMI"
 nameFileBAT = {'nameFile1' : "AnalysisTestResult" , 'nameFile2' : "zipTSILog" , 'nameFile3' : "HousekeepingLog" , 'nameFile4' : "ContinuesRun_EikonMon"}
 
@@ -68,12 +68,15 @@ waitTimeAll = max(waitTimeCSL,waitTimeCSY,waitTimeCEXEIT) + 5
 
 # =============================== ServiceCheckResponseTime's Configuration ===============================
 #For Configure Property in ServiceCheckResponseTime
-Developer = {'logname' : "Developer_E2ELog2GMI.log" , 'severity' : "WARNING" , 'splitSymbol' : "|"}
+Developer = {'logname' : "Developer.log" , 'severity' : "WARNING" , 'splitSymbol' : "|"}
 #pathDeveloper = r"D:\E2EPerformance\AppstatParser\logs\HanuLogs\E2ELog2GMI"
-pathDeveloper = r"C:\Users\U6031187\Desktop"
+pathDeveloper = r"D:\E2EPerformance\E2EMonitoring\Log"
 
 #For Configure Property in Function CheckResponseTime
-limitTimeRP = {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 }
-limitTimeEdge = {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 }
+serverSTC = { 'limitTimeRP' : {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 } , 'limitTimeEdge' : {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 } }
+serverNTC = { 'limitTimeRP' : {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 } , 'limitTimeEdge' : {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 } }
+serverHDC = { 'limitTimeRP' : {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 } , 'limitTimeEdge' : {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 } }
+serverDTC = { 'limitTimeRP' : {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 } , 'limitTimeEdge' : {'10Minute' : 0 , '60Minute' : 0 , 'Daily' : 0 , 'Minute' : 0 , 'TAQCooked' : 0 , 'TASCooked' : 0 , 'TASRAW' : 0 , 'TickTAQ' : 0 , 'TickTAS' : 0 , 'Yearly' : 0 } }
+
 
 

@@ -76,16 +76,9 @@ def RecoverySensuLog (path,nameservice):
     commandStart = "net start " + nameservice
     os.system(commandStop)
     
-    if os.path.exists(path) == False :
-        createFile = open(path,"wb")
-        createFile.write("")
-        createFile.close()
-    else:
+    if os.path.exists(path) == True :
         os.remove(path)
-        createFile = open(path,"wb")
-        createFile.write("")
-        createFile.close()
-    
+            
     os.system(commandStart)
     
 if __name__ == '__main__':

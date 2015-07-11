@@ -183,11 +183,20 @@ def CheckSensuLog (path,waitTime):
     return False
 
 # =============================== ServiceCheckResponseTime's Function =============================
-def CheckResponseTime (type,interval,time):
+def CheckResponseTime (server,type,interval,time):
     if type == "RP" :
-        limitTime = ServiceCheckConfig.limitTimeRP[interval]
+        type = "limitTimeRP"
     elif type == "Edge" :
-        limitTime = ServiceCheckConfig.limitTimeEdge[interval]
+        type = "limitTimeEdge"
+        
+    if server == "STC" :
+        limitTime = ServiceCheckConfig.serverSTC[type][interval]
+    elif server == "NTC" :
+        limitTime = ServiceCheckConfig.serverNTC[type][interval]
+    elif server == "HDC" : 
+        limitTime = ServiceCheckConfig.serverHDC[type][interval]
+    elif server == "DTC" : 
+        limitTime = ServiceCheckConfig.serverDTC[type][interval]
     
     if time < limitTime :
         return True 
