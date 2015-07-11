@@ -19,7 +19,7 @@ def ServiceCheckResponseTime(dateData,testCase,responseTime):
     interval = info[0]
     if ServiceCheckFunction.CheckResponseTime (server,type,interval,responseTime) == False :
         infoDetect = infoServiceCheckResponseTime(dateData,server,type,interval,responseTime)
-        ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathDeveloper,ServiceCheckConfig.Developer['logname'],infoDetect,ServiceCheckConfig.Developer['splitSymbol'])
+        ServiceCheckFunction.generateReportLog_version2(ServiceCheckConfig.pathDeveloper,ServiceCheckConfig.Developer['logname'],infoDetect,ServiceCheckConfig.Developer['splitSymbol'],ServiceCheckConfig.Developer['logFileSize'])
             
             
 if __name__ == '__main__':

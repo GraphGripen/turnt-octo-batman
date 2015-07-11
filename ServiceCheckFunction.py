@@ -24,6 +24,10 @@ def ReadfileLog(path):
     f_in.close()
     return lstOutput
 
+def CheckFileSize(filePath):
+    statinfo = os.stat(filePath)
+    return statinfo.st_size 
+    
 def generateReportLog_version1(path,fileLogName,info,splitSymbol) :
     if not os.path.exists(path):
         os.makedirs(path)
@@ -67,18 +71,31 @@ def generateReportLog_version1(path,fileLogName,info,splitSymbol) :
     f_out.write(output)
     f_out.close()   
 
-def generateReportLog_version2(path,fileLogName,info,splitSymbol) :   
+def generateReportLog_version2(path,fileLogName,info,splitSymbol,logLimitSize) :   
     if not os.path.exists(path):
         os.makedirs(path)
         
-    path = os.path.join(path, fileLogName)
+    filePath = os.path.join(path, fileLogName)
+    nameFile = fileLogName[0:fileLogName.find(".")]
     
-    if not os.path.exists(path):
-        f_out = open(path,"wb")
+    if not os.path.exists(filePath):
+        f_out = open(filePath,"wb")
         detailLog = ""
         f_out.write(detailLog)
     else:
-        f_out = open(path,"ab")    
+        fileSize = CheckFileSize(filePath)
+        if(fileSize > logLimitSize):
+            #Backup the file to another filename
+            timePrefix = datetime.now().strftime('%Y%m%d_%H%M%S')
+            newName = nameFile + "_" + timePrefix + ".log"
+            newName = os.path.join(path,newName)
+            os.rename(filePath,newName)
+            #Prepare for new file
+            f_out = open(filePath,"wb")
+            detailLog = ""
+            f_out.write(detailLog)
+        else:
+            f_out = open(filePath,"ab")    
 
     content = []
     content.append('{"' + "timestamp" + '":'+'"' + info.creationTime + '"')
