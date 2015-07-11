@@ -13,7 +13,7 @@ sequenceNumber = 0
 
 # =============================== ServiceCheckAvailability's Configuration ===============================
 #For Configure Property in ServiceCheckAvailability
-Operation = {'logname' : "Operation_E2ELog2GMI.log" , 'severity' : "CRITICAL" , 'recoverySeverity' : "INFORMATION" ,'splitSymbol' : "|"}
+Operation = {'logname' : "Operation_E2ELog2GMI.log" , 'severity' : "CRITICAL" , 'recoverySeverity' : "INFORMATION" ,'splitSymbol' : ","}
 #pathOperation = r"D:\E2EPerformance\AppstatParser\logs\HanuLogs\E2ELog2GMI"
 pathOperation = r"C:\Users\U6031187\Desktop"
 
@@ -37,32 +37,34 @@ waitTimeCSY = 20
 pathCSL = r"D:\eikon\monitoring\log\sensu\sensu-client.log"
 waitTimeCSL = 20
 
-#For Path File For File .BAT
-pathRecoveryAnalysisTestResult = r'C:\Users\U6031187\Desktop\AAA\ETSVersionCheck\accepthostkeyCOVersion.bat'   #r'D:\E2EPerformance\Automation\RunE2E_EikonMon.bat'
-pathRecoveryzipTSILog = r'D:\E2EPerformance\Automation\RunE2E_EikonMon.bat'
-pathRecoveryHousekeepingLog = r'D:\E2EPerformance\Automation\RunE2E_EikonMon.bat'
-pathRecoveryEikonMon = r'D:\E2EPerformance\Automation\RunE2E_EikonMon.bat'
+#For Path File For File .py
+pathRecoveryAnalysisTestResult = r'D:\PostProcess\Script\AnalysisTestResult.py'
+pathRecoveryzipTSILog = r'D:\PostProcess\Script\zipTSILog.py'
+pathRecoveryHousekeepingLog = r'D:\PostProcess\Script\HousekeepingLog.py'
+pathRecoveryEikonMon = r'D:\PostProcess\Script\ContinuesRun_EikonMon.py'
 
 #For Message in Each Checker (Default)
-falseMsg_101 = "File AnalysisTestResult.py is downed"
-falseMsg_102 = "File zipTSILog.py is downed"
-falseMsg_103 = "File HousekeepingLog.py is downed"
-falseMsg_104 = "File ContinuesRun_EikonMon.py is downed"
-falseMsg_105 = "File TsiLoadTest.exe is downed"
+falseMsg_101 = "File AnalysisTestResult.py isn't running"
+falseMsg_102 = "File zipTSILog.py isn't running"
+falseMsg_103 = "File HousekeepingLog.py isn't running"
+falseMsg_104 = "File ContinuesRun_EikonMon.py isn't running"
+falseMsg_105 = "File TsiLoadTest.exe isn't running"
 falseMsg_106 = "Sensu-Client-Service is stopped"
 falseMsg_107 = "File since-db1-e2e-perf.yaml is not changed"
 falseMsg_108 = "File sensu-client.log is not changed"
 
 #For Message in Each Checker (Recovery)
-recoveryMsg_101 = {'start' : "Attemp Recovery File AnalysisTestResult.py" , 'complete' : "Recovery File AnalysisTestResult.py Success" , 'fail' : "Unable Recovery File AnalysisTestResult.py"}
-recoveryMsg_102 = {'start' : "Attemp Recovery File zipTSILog.py" , 'complete' : "Recovery File zipTSILog.py Success" , 'fail' : "Unable Recovery File zipTSILog.py"}
-recoveryMsg_103 = {'start' : "Attemp Recovery File HousekeepingLog.py" , 'complete' : "Recovery File HousekeepingLog.py Success" , 'fail' : "Unable Recovery File HousekeepingLog.py"}
-recoveryMsg_104 = {'start' : "Attemp Recovery File ContinuesRun_EikonMon.py" , 'complete' : "Recovery File ContinuesRun_EikonMon.py Success" , 'fail' : "Unable Recovery File ContinuesRun_EikonMon.py"}
-recoveryMsg_105 = {'start' : "Attemp Recovery File TsiLoadTest.exe" , 'complete' : "Recovery File TsiLoadTest.exe Success" , 'fail' : "Unable Recovery File TsiLoadTest.exe"}
-recoveryMsg_106 = {'start' : "Attemp Recovery Sensu-Client-Service" , 'complete' : "Recovery Sensu-Client-Service Success" , 'fail' : "Unable Recovery Sensu-Client-Service"}
-recoveryMsg_107 = {'start' : "Attemp Recovery since-db1-e2e-perf.yaml" , 'complete' : "Recovery since-db1-e2e-perf.yaml Success" , 'fail' : "Unable Recovery since-db1-e2e-perf.yaml"}
-recoveryMsg_108 = {'start' : "Attemp Recovery sensu-client.log" , 'complete' : "Recovery sensu-client.log Success" , 'fail' : "Unable Recovery sensu-client.log"}
+recoveryMsg_101 = {'start' : "Attemping recover File AnalysisTestResult.py" , 'complete' : "Recovery File AnalysisTestResult.py is success" , 'fail' : "Unable recover File AnalysisTestResult.py"}
+recoveryMsg_102 = {'start' : "Attemping recover File zipTSILog.py" , 'complete' : "Recovery File zipTSILog.py is success" , 'fail' : "Unable recover File zipTSILog.py"}
+recoveryMsg_103 = {'start' : "Attemping recover File HousekeepingLog.py" , 'complete' : "Recovery File HousekeepingLog.py is success" , 'fail' : "Unable recover File HousekeepingLog.py"}
+recoveryMsg_104 = {'start' : "Attemping recover File ContinuesRun_EikonMon.py" , 'complete' : "Recovery File ContinuesRun_EikonMon.py is success" , 'fail' : "Unable recover File ContinuesRun_EikonMon.py"}
+recoveryMsg_105 = {'start' : "Attemping recover File TsiLoadTest.exe" , 'complete' : "Recovery File TsiLoadTest.exe is success" , 'fail' : "Unable recover File TsiLoadTest.exe"}
+recoveryMsg_106 = {'start' : "Attemping recover Sensu-Client-Service" , 'complete' : "Recovery Sensu-Client-Service is success" , 'fail' : "Unable recover Sensu-Client-Service"}
+recoveryMsg_107 = {'start' : "Attemping recover since-db1-e2e-perf.yaml" , 'complete' : "Recovery since-db1-e2e-perf.yaml is success" , 'fail' : "Unable recover since-db1-e2e-perf.yaml"}
+recoveryMsg_108 = {'start' : "Attemping recover sensu-client.log" , 'complete' : "Recovery sensu-client.log is success" , 'fail' : "Unable recover sensu-client.log"}
 
+#For Time to Wait in 1 all checkers(Loop)
+waitTimeAll = max(waitTimeCSL,waitTimeCSY,waitTimeCEXEIT) + 5
 
 # =============================== ServiceCheckResponseTime's Configuration ===============================
 #For Configure Property in ServiceCheckResponseTime

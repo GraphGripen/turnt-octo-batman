@@ -2,12 +2,19 @@ from datetime import datetime
 import os
 import time
 import wmi
+import pythoncom
 
 import ServiceCheckConfig
 
 # =============================== General Function ============================= 
-def getCurrentDateTime():
-    return datetime.now().strftime('%Y-%m-%dT%H:%M:%S')    
+def getCurrentDateTime_version1():
+    return datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+
+def getCurrentDateTime_version2():
+    currentTime = datetime.now()
+    currentmillisecond = currentTime.microsecond/1000
+    outputTime = currentTime.strftime('%Y-%m-%dT%H:%M:%S') + "." + str(currentmillisecond)      
+    return outputTime     
 
 def ReadfileLog(path):
     f_in = open(path,"rb")
@@ -17,7 +24,7 @@ def ReadfileLog(path):
     f_in.close()
     return lstOutput
 
-def generateReportLog(path,fileLogName,info,splitSymbol) :
+def generateReportLog_version1(path,fileLogName,info,splitSymbol) :
     if not os.path.exists(path):
         os.makedirs(path)
         
@@ -58,7 +65,39 @@ def generateReportLog(path,fileLogName,info,splitSymbol) :
     
     output = splitSymbol.join(content) + '\r\n'
     f_out.write(output)
-    f_out.close()    
+    f_out.close()   
+
+def generateReportLog_version2(path,fileLogName,info,splitSymbol) :   
+    if not os.path.exists(path):
+        os.makedirs(path)
+        
+    path = os.path.join(path, fileLogName)
+    
+    if not os.path.exists(path):
+        f_out = open(path,"wb")
+        detailLog = ""
+        f_out.write(detailLog)
+    else:
+        f_out = open(path,"ab")    
+
+    content = []
+    content.append('{"' + "timestamp" + '":'+'"' + info.creationTime + '"')
+    content.append('"' + "msg_severity"  + '":'+'"' + info.severity + '"')
+    content.append('"' + "message"  + '":'+'"' + info.msg + '"')
+
+    output = splitSymbol.join(content) + '\r\n'
+    f_out.write(output)
+    f_out.close()   
+
+def readFindProcessID(path):
+    f_in = open(path,"rb")
+    output = ""
+    for line in f_in:
+        if(line.find("cmd.exe") != -1 ):
+           output = line
+    f_in.close()
+    detail = output.split()
+    return detail[1]
     
 # =============================== ServiceCheckAvailability's Function =============================  
 def CheckRunningBAT(filename,destinationLog):
@@ -70,10 +109,10 @@ def CheckRunningBAT(filename,destinationLog):
     for data in contentLog :
         if data.find("No tasks are running") != -1 :
             return False
-    
     return True
    
 def CheckEXEInTask (nameProcess,waitTime):
+    pythoncom.CoInitialize()
     #Before
     task = wmi.WMI ()
     countTsiLoadTestBefore = len(task.Win32_Process (name = nameProcess))
@@ -84,13 +123,12 @@ def CheckEXEInTask (nameProcess,waitTime):
     countTsiLoadTestAfter = len(task.Win32_Process (name = nameProcess))
     print "countTsiLoadTestBefore : " + str(countTsiLoadTestBefore)
     print "countTsiLoadTestAfter : " + str(countTsiLoadTestAfter)
+    pythoncom.CoUninitialize()
     #Check
     if (countTsiLoadTestBefore != countTsiLoadTestAfter) :
         if countTsiLoadTestBefore != 0 or countTsiLoadTestAfter != 0 :
             return True
-        
-        return False
-            
+        return False  
     return False
     
 def CheckStatusService (nameservice):
@@ -102,7 +140,6 @@ def CheckStatusService (nameservice):
     else :
         if detailService[0].State == "Running" :
             return True
-    
     return False
     
 def CheckSinceYaml (path,waitTime):
@@ -127,7 +164,6 @@ def CheckSinceYaml (path,waitTime):
             if dataBefore != dataAfter :
                 return True
             count += 1
- 
     return False
             
 def CheckSensuLog (path,waitTime):
@@ -144,7 +180,6 @@ def CheckSensuLog (path,waitTime):
     print sizeAfter
     if sizeBefore != sizeAfter and sizeBefore < sizeAfter :
         return True
-    
     return False
 
 # =============================== ServiceCheckResponseTime's Function =============================
@@ -155,21 +190,9 @@ def CheckResponseTime (type,interval,time):
         limitTime = ServiceCheckConfig.limitTimeEdge[interval]
     
     if time < limitTime :
-        return True
-        
+        return True 
     return False
-
-
-def main():
-    while(1):
-        #CheckEXEInTask (ServiceCheckConfig.FileTsiLoadTest,ServiceCheckConfig.waitTimeCEXEIT)  
-        #print CheckSensuLog (ServiceCheckConfig.pathCSL,ServiceCheckConfig.waitTimeCSL)
-        #CheckSinceYaml (ServiceCheckConfig.pathCSY,ServiceCheckConfig.waitTimeCSY)
-        #print CheckRunningBAT("zipTSILog",ServiceCheckConfig.pathCRBAT,ServiceCheckConfig.waitTimeCRBAT)
-        #print CheckStatusService (ServiceCheckConfig.nameService,ServiceCheckConfig.waitTimeCSS)
-        CheckResponseTime ("D:\E2EPerformance\AppstatParser\logs\Edge\Default")
-        time.sleep(5) 
      
 if __name__ == '__main__':
-    main()
+    print "Reuters"
     
