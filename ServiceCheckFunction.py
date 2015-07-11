@@ -73,15 +73,15 @@ def CheckRunningBAT(filename,destinationLog):
     
     return True
    
-def CheckEXEInTask (file,waitTime):
+def CheckEXEInTask (nameProcess,waitTime):
     #Before
     task = wmi.WMI ()
-    countTsiLoadTestBefore = len(task.Win32_Process (name = file))
+    countTsiLoadTestBefore = len(task.Win32_Process (name = nameProcess))
     #Wait
     time.sleep(waitTime)
     #After
     task = wmi.WMI ()
-    countTsiLoadTestAfter = len(task.Win32_Process (name = file))
+    countTsiLoadTestAfter = len(task.Win32_Process (name = nameProcess))
     print "countTsiLoadTestBefore : " + str(countTsiLoadTestBefore)
     print "countTsiLoadTestAfter : " + str(countTsiLoadTestAfter)
     #Check
